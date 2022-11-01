@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Taylor Here">
+
+
+
+    <meta name="description" content="计算机软件工程师">
+
+
+    <meta name="keywords" content="taylor,distributed,deeplearning,sofeware,ubuntu">
+
+
+<title>NLP Interview notes | TaylorHere</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="stylesheet" href="/css/base.css">
+    
+    <link rel="stylesheet" href="/css/custom.css">
+    
+    <link rel="stylesheet" href="/css/font.css">
+    
+    <link rel="stylesheet" href="/css/layout.css">
+    
+    <link rel="stylesheet" href="/css/media.css">
+    
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+    <link rel="stylesheet" href="/css/variable.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">TaylorHere</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">TaylorHere</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">NLP Interview notes</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Taylor Here</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 1, 2022&nbsp;&nbsp;4:56:47</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="NLP任务"><a href="#NLP任务" class="headerlink" title="NLP任务"></a>NLP任务</h1><p>SRL<br>Coref<br>SNLI<br>SQuAD<br>SST-5</p>
+<h1 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h1><p><a target="_blank" rel="noopener" href="https://www.jiqizhixin.com/articles/2018-12-14-4">https://www.jiqizhixin.com/articles/2018-12-14-4</a></p>
+<h2 id="模型基础结构"><a href="#模型基础结构" class="headerlink" title="模型基础结构"></a>模型基础结构</h2><p>1-to-1, 1-to-n, n-to-n, n-to-1<br>递归, 浅层, 隐变量(h)<br>h1 &#x3D; f(Ux1+Wh0+b)<br>y &#x3D; softmax(Vh1+c)</p>
+<h3 id="Encoder-Decoder"><a href="#Encoder-Decoder" class="headerlink" title="Encoder-Decoder"></a>Encoder-Decoder</h3><p>a RNN as Encoder then<br>contact hn, like<br>c &#x3D; hn<br>c &#x3D; q(hn)<br>c &#x3D; q(h1,hn)<br>use c as another RNN input, generate output</p>
+<h3 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h3><p>y &#x3D; attention(cn, hn, aij) &#x3D;&gt; a<br>每个c与输出y直接适配最合适的h<br>c1 &#x3D; h1<em>a11 + h2</em>a12<br>c2 &#x3D; h1<em>a21 + h2</em>a22</p>
+<h1 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h1><p>Predict Based Word embedding<br>train a deep model, with mask LM task etc.<br>extract first layer output as the embeeding</p>
+<h1 id="transformer"><a href="#transformer" class="headerlink" title="transformer"></a>transformer</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338817680">https://zhuanlan.zhihu.com/p/338817680</a></p>
+<h2 id="模型基础结构-1"><a href="#模型基础结构-1" class="headerlink" title="模型基础结构"></a>模型基础结构</h2><p>Encoder-Decoder<br>input &#x3D; word embedding(Word2Vec, Glove, ELMo, etc.) + position embedding(三角函数或训练出来)<br>Encoder(input) -&gt; c with shape n,d1<br>Decoder(c) -&gt; y</p>
+<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h3><p>Q,K,V &#x3D; x * (WQ, WK, WV) with shape n,d2, d2 &lt; d1<br>Attention(Q,K,V) &#x3D; softmax(QK^T&#x2F;sqrd(d_k))V</p>
+<p>softmax(QK^T) -&gt; n,n 这个矩阵可以表示单词之间的 attention 强度</p>
+<p>Z &#x3D; softmax(QK^T) * V with shape n,d<br>Z 包含了token i与其他所有token的联系</p>
+<h3 id="Multi-Head-Attention"><a href="#Multi-Head-Attention" class="headerlink" title="Multi-Head Attention"></a>Multi-Head Attention</h3><p>h层self-attention<br>Linear(concat(Z1, Zh)) -&gt; Z with shape n,d<br>化点难点: h层合一起算可能会导致GEMM算子工作在奇怪的形状上, 分开算会导致pipline变长</p>
+<h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><h4 id="Add-amp-Norm"><a href="#Add-amp-Norm" class="headerlink" title="Add &amp; Norm"></a>Add &amp; Norm</h4><p>x + f(x) -&gt; 残差连接，通常用于解决多层网络训练的问题，可以让网络只关注当前差异的部分<br>LayerNorm(X + MultiHeadAttention(X))<br>LayerNorm(X + FeedForward(X))<br>Layer Normalization 会将每一层神经元的输入都转成均值方差都一样的，这样可以加快收敛。</p>
+<h4 id="Feed-Forward"><a href="#Feed-Forward" class="headerlink" title="Feed Forward"></a>Feed Forward</h4><p>两个全链接层, 第一层Relu激活, 第二层没有激活<br>max(0, XW1+b1)W2 + b2</p>
+<p>Multi-Head Attention, Feed Forward, Add &amp; Norm 就可以构造出一个 Encoder block, 多个block堆叠注册encoder</p>
+<h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><p>包含两个 Multi-Head Attention 层<br>第一个 Multi-Head Attention 层采用了 Masked 操作在 Softmax 之前需要使用Mask矩阵遮挡住每一个单词之后的信息, QK^T *(elementwise) Mask<br>第二个 Multi-Head Attention 层的K, V矩阵使用 Encoder 的编码信息矩阵C进行计算，而Q使用上一个 Decoder block 的输出计算<br>根据 Encoder 的输出 C计算得到 K, V，根据上一个 Decoder block 的输出 Z 计算 Q<br>最后有一个 Softmax -&gt; Z<br>Z 的每一行包含(0,n)个token的信息</p>
+<h3 id="pipline"><a href="#pipline" class="headerlink" title="pipline"></a>pipline</h3><ul>
+<li>输入的词向量首先叠加上Positional Encoding，然后输入至Transformer内</li>
+<li>每个Encoder Transformer会进行一次Multi-head self attention-&gt;Add &amp; Normalize-&gt;FFN-&gt;Add &amp; Normalize流程，然后将输出输入至下一个Encoder中</li>
+<li>最后一个Encoder的输出将会作为c保留, 后面Decoder会用到</li>
+<li>每个Decoder Transformer会进行一次Masked Multi-head self attention-&gt;Multi-head self attention-&gt;Add &amp; Normalize-&gt;FFN-&gt;Add &amp; Normalize流程，其中Multi-head self attention时的K、V至来自于Encoder的c。根据任务要求输出需要的最后一层Embedding</li>
+<li>Transformer的输出向量可以用来做各种下游任务</li>
+</ul>
+<h1 id="ELMo"><a href="#ELMo" class="headerlink" title="ELMo"></a>ELMo</h1><p>Embeddings from Language Model</p>
+<h2 id="模型基础结构-2"><a href="#模型基础结构-2" class="headerlink" title="模型基础结构"></a>模型基础结构</h2><p>bidirectoinal RNN</p>
+<h2 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h2><p><bos> -&gt; w1, w1 -&gt; w2<br>wn -&gt; wn-1, wn-1 -&gt; wn-2</p>
+<p>contact(h1,h2) -&gt; embedding</p>
+<h2 id="Fine-tuning"><a href="#Fine-tuning" class="headerlink" title="Fine-tuning"></a>Fine-tuning</h2><p>Multi-layer ELMo<br>a1 * h1 + a2 * h2, where a1, a2 are trainable</p>
+<h1 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h1><p>Bidirectional Encoder Representations from Transformers<br><a target="_blank" rel="noopener" href="https://wmathor.com/index.php/archives/1456/">https://wmathor.com/index.php/archives/1456/</a><br><a target="_blank" rel="noopener" href="https://leemeng.tw/attack_on_bert_transfer_learning_in_nlp.html">https://leemeng.tw/attack_on_bert_transfer_learning_in_nlp.html</a></p>
+<h2 id="模型基础结构-3"><a href="#模型基础结构-3" class="headerlink" title="模型基础结构"></a>模型基础结构</h2><p>Transformer Encoder</p>
+<h2 id="预训练任务"><a href="#预训练任务" class="headerlink" title="预训练任务"></a>预训练任务</h2><ul>
+<li>输入数据中随机选择15%的词用于预测</li>
+<li>这15%的词中，80%的词向量输入时被替换为<MASK></li>
+<li>10%的词的词向量在输入时被替换为其他词的词向量</li>
+<li>另外10%保持不动</li>
+<li>完形填空</li>
+<li>预测下一句是否连贯<br>[CLS] w1, w2, [MASK], w4, w5<br>-&gt; [CLS] -&gt; NSP<br>-&gt; [MASK] -&gt; MLM</li>
+</ul>
+<h2 id="special-token"><a href="#special-token" class="headerlink" title="special token"></a>special token</h2><ul>
+<li>[pad] 占位</li>
+<li>[unk] 未知embedding</li>
+<li>[mask] mask</li>
+<li>[cls] classification</li>
+<li>[sep] Sentence Prediction or Sentence Padding?</li>
+</ul>
+<h2 id="Fine-Tuning-任务"><a href="#Fine-Tuning-任务" class="headerlink" title="Fine-Tuning 任务"></a>Fine-Tuning 任务</h2><ul>
+<li>句子分类,用第一个[CLS]标签对应的结果作为 linear层输入, 减少如选用w1时会发生权重干扰的影响</li>
+<li>句子中每个词分类, 每个词对应的结果作为linear层输入</li>
+<li>推理, [CLS] s1 [SEP] s2, 同句子分类</li>
+<li>阅读理解(QA)<br>f(D,Q) -&gt; [s,e]<br>A &#x3D; D[s,e]<br>[CLS] q1, q2, [SEP] d1,d2<br>对 dn的输出和D,Q的向量做内积再送入softmax</li>
+</ul>
+<h2 id="变体"><a href="#变体" class="headerlink" title="变体"></a>变体</h2><ul>
+<li>MiniLM</li>
+<li>macbert</li>
+</ul>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>QA任务: 双塔结构优化, 基于<code>浅层解码器学到的都是浅层信息</code>这一假设, 将浅层的输入Q,D,拆开算后续组合, 这样能减少计算的矩阵体积<br>线性代数库: blas库更换, MKL on CPU, CuBlas on GPU, etc<br>安全的减少Encoder层数, 减少Head数<br>扔掉FFN层</p>
+<h1 id="GPT"><a href="#GPT" class="headerlink" title="GPT"></a>GPT</h1><p>Generative Pre-Training</p>
+<h2 id="模型基础结构-4"><a href="#模型基础结构-4" class="headerlink" title="模型基础结构"></a>模型基础结构</h2><p>Transformer Decoder<br>Self-Attention 替换成了 Masked Self-Attention<br>即句子中的每个词都只能对包括自己在内的前面所有词进行 Attention<br>输出是下一个词的概率 n&#x3D;2048</p>
+<h2 id="预训练任务-1"><a href="#预训练任务-1" class="headerlink" title="预训练任务"></a>预训练任务</h2><h2 id="变体-1"><a href="#变体-1" class="headerlink" title="变体"></a>变体</h2>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Taylor Here</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://taylorhere.github.io/2022/11/01/NLP-interview/">http://taylorhere.github.io/2022/11/01/NLP-interview/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/10/30/hello-world/">Hello World</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Taylor Here | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
